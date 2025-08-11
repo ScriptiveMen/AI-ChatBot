@@ -53,59 +53,61 @@ const ChatBot = () => {
   }, [message]);
 
   return (
-    <div className="py-3 px-2 h-screen w-screen flex flex-col gap-1">
-      <div className="messages w-full h-full overflow-y-auto flex flex-col gap-3 p-2">
-        {message.length > 0 ? (
-          message.map((msg, idx) => (
-            <div
-              key={idx}
-              className={`flex ${
-                msg.sender === "user" ? "justify-end" : "justify-start"
-              }`}
-            >
+    <div className="py-3 px-2 h-screen w-screen ">
+      <div className="flex flex-col gap-1 h-full w-full md:w-[70%] m-auto">
+        <div className="messages w-full  h-[90%] overflow-y-auto flex flex-col gap-3 p-2">
+          {message.length > 0 ? (
+            message.map((msg, idx) => (
               <div
-                className={`px-4 py-3 rounded-3xl text-white max-w-[70%] ${
-                  msg.sender === "user"
-                    ? "bg-blue-400 rounded-br-none"
-                    : "bg-gray-500 rounded-bl-none"
+                key={idx}
+                className={`flex ${
+                  msg.sender === "user" ? "justify-end" : "justify-start"
                 }`}
               >
-                <h3>
-                  <ReactMarkdown>{msg.text}</ReactMarkdown>
-                </h3>
-                <span className="text-right block text-sm pt-2">
-                  {msg.time}
-                </span>
+                <div
+                  className={`px-4 py-3 rounded-3xl text-white max-w-[70%] ${
+                    msg.sender === "user"
+                      ? "bg-blue-400 rounded-br-none"
+                      : "bg-gray-500 rounded-bl-none"
+                  }`}
+                >
+                  <h3>
+                    <ReactMarkdown>{msg.text}</ReactMarkdown>
+                  </h3>
+                  <span className="text-right block text-sm pt-2">
+                    {msg.time}
+                  </span>
+                </div>
               </div>
-            </div>
-          ))
-        ) : (
-          <h1 className="m-auto italic opacity-40">
-            Start a new conversation...
-          </h1>
-        )}
+            ))
+          ) : (
+            <h1 className="m-auto italic opacity-40">
+              Start a new conversation...
+            </h1>
+          )}
 
-        <div ref={bottomref}></div>
-      </div>
+          <div ref={bottomref}></div>
+        </div>
 
-      <div className="typebox w-full">
-        <form
-          onSubmit={handleSubmit(submitHandler)}
-          className="flex justify-between gap-2"
-        >
-          <input
-            {...register("user_message")}
-            className="w-full rounded-2xl outline-none border py-3 px-4 placeholder:text-sm"
-            type="text"
-            placeholder="Type Your Message Here..."
-          />
-          <button
-            className="px-6 py-2 rounded-2xl bg-blue-400 text-white font-semibold"
-            type="submit"
+        <div className="typebox w-full">
+          <form
+            onSubmit={handleSubmit(submitHandler)}
+            className="flex justify-between gap-2"
           >
-            Send
-          </button>
-        </form>
+            <input
+              {...register("user_message")}
+              className="w-full border-2 border-gray-300 focus:border-blue-400 rounded-2xl outline-none py-3 px-4 placeholder:text-sm"
+              type="text"
+              placeholder="Type Your Message Here..."
+            />
+            <button
+              className="px-6 py-2 rounded-2xl bg-blue-400 text-white font-semibold"
+              type="submit"
+            >
+              Send
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
