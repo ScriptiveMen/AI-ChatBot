@@ -13,9 +13,12 @@ const ChatBot = () => {
   const { register, handleSubmit, resetField } = useForm();
 
   const submitHandler = ({ user_message }) => {
+    const userMsg = user_message.trim();
+    if (!userMsg) return;
+
     let usernewMsg = {
       sender: "user",
-      text: user_message,
+      text: userMsg,
       time: new Date().toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
